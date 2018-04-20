@@ -1,15 +1,20 @@
-import telebot
-import requests
-requests.packages.urllib3.disable_warnings()
+import telegram
+from telegram.ext import *
 
-bot = telebot.TeleBot('348031945:AAH6pTFVLYMbSrno0tIqNzWf3ZY1bLkeJfw')
+mi_bot = telegram.Bot(token="348031945:AAH6pTFVLYMbSrno0tIqNzWf3ZY1bLkeJfw")
+mi_bot_updater = Updater(mi_bot.token)
 
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, "Martinez, how are you doing?")
+def start(bot, update, pass_chat_data=True):
+    update.message.chat_id
+    bot.sendMessage(chat_id=update.message.chat_id, text="Bienvenido!")
     
-@bot.message_handler(func=lambda message: True)
-def echo_all(message):
-    bot.reply_to(message, message.text)
+start_handler = CommandHandler('start', start)
 
-bot.polling()
+dispatcher = mi_bot_updater.dispatcher
+dispatcher.add_handler(start_handler)
+
+mi_bot_updater.start_polling()
+mi_bot_updater.idle()
+
+while True:
+    pass
