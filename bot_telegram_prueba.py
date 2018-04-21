@@ -2,8 +2,8 @@ import telegram
 from telegram.ext import *
 
 #no funciona
-import requests
-requests.packages.urllib3.disable_warnings() 
+import urllib3
+urllib3.disable_warnings()
 
 mi_bot = telegram.Bot(token="348031945:AAH6pTFVLYMbSrno0tIqNzWf3ZY1bLkeJfw")
 mi_bot_updater = Updater(mi_bot.token)
